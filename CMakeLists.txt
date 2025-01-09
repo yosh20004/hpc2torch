@@ -42,10 +42,12 @@ if(USE_CUDA)
     enable_language(CUDA)
     list(APPEND ALL_SOURCE_FILES ${CUDA_SOURCE_FILES} ${CPP_SOURCE_FILES})
     add_library(my_library SHARED ${ALL_SOURCE_FILES})# 创建库或可执行文件
+    find_package(CUDA REQUIRED)
+    include_directories(${CUDA_INCLUDE_DIRS})#寻找cuda以及cudnn等安装路径
     set_target_properties(my_library PROPERTIES
         CUDA_ARCHITECTURES 80
     )
-    target_link_libraries(my_library cudnn cublas)#如果调用cudnn库需要链接cudnn, cublas
+    target_link_libraries(my_library ${CUDA_LIBRARIES} cudnn cublas)#如果调用cudnn库需要链接cudnn, cublas
 
 elseif(USE_BANG)
     message(STATUS "BANG build enabled.")
