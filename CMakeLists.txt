@@ -47,7 +47,8 @@ if(USE_CUDA)
     set_target_properties(my_library PROPERTIES
         CUDA_ARCHITECTURES 80
     )
-    target_link_libraries(my_library ${CUDA_LIBRARIES} cudnn cublas)#如果调用cudnn库需要链接cudnn, cublas
+    # target_link_libraries(my_library ${CUDA_LIBRARIES} cudnn cublas)#如果调用cudnn库需要链接cudnn, cublas
+    target_link_libraries(my_library ${CUDA_LIBRARIES} cublas)#如果调用cudnn库需要链接cudnn, cublas
 
 elseif(USE_BANG)
     message(STATUS "BANG build enabled.")
